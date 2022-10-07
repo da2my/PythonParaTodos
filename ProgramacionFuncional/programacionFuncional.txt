@@ -1,0 +1,170 @@
+La programación funcional es un paradigma en el que la programa-
+ción se basa casi en su totalidad en funciones, entendiendo el concepto
+de función según su definición matemática, y no como los simples
+subprogramas de los lenguajes imperativos que hemos visto hasta
+ahora.
+En los lenguajes funcionales puros un programa consiste exclusiva-
+mente en la aplicación de distintas funciones a un valor de entrada
+para obtener un valor de salida.
+Python, sin ser un lenguaje puramente funcional incluye varias caracte-
+rísticas tomadas de los lenguajes funcionales como son las funciones de
+orden superior o las funciones lambda (funciones anónimas).
+
+Funciones de orden superior
+
+El concepto de funciones de orden superior se refiere al uso de fun-
+ciones como si de un valor cualquiera se tratara, posibilitando el pasar
+funciones como parámetros de otras funciones o devolver funciones
+como valor de retorno.
+Esto es posible porque, como hemos insistido ya en varias ocasiones,
+en Python todo son objetos. Y las funciones no son una excepción.
+
+Iteraciones de orden superior sobre listas
+
+Una de las cosas más interesantes que podemos hacer con nuestras
+funciones de orden superior es pasarlas como argumentos de las fun-
+ciones map , filter y reduce . Estas funciones nos permiten sustituir los
+bucles típicos de los lenguajes imperativos mediante construcciones
+equivalentes.
+
+map(function, sequence[, sequence, ...])
+La función map aplica una función a cada elemento de una secuencia y
+devuelve una lista con el resultado de aplicar la función a cada elemen-
+to. Si se pasan como parámetros n secuencias, la función tendrá que
+aceptar n argumentos. Si alguna de las secuencias es más pequeña que
+las demás, el valor que le llega a la función function para posiciones
+mayores que el tamaño de dicha secuencia será None .
+
+filter(function, sequence)
+La funcion filter verifica que los elementos de una secuencia cum-
+plan una determinada condición, devolviendo una secuencia con los
+elementos que cumplen esa condición. Es decir, para cada elemento de
+sequence se aplica la función function; si el resultado es True se añade
+a la lista y en caso contrario se descarta.
+
+reduce(function, sequence[, initial])
+La función reduce aplica una función a pares de elementos de una
+secuencia hasta dejarla en un solo valor.
+A continuación podemos ver un ejemplo en el que se utiliza reduce
+para sumar todos los elementos de una lista.
+
+Funciones lambda
+
+El operador lambda sirve para crear funciones anónimas en línea. Al ser
+funciones anónimas, es decir, sin nombre, estas no podrán ser referen-
+ciadas más tarde.
+Las funciones lambda se construyen mediante el operador lambda , los
+parámetros de la función separados por comas (atención, SIN parénte-
+sis), dos puntos ( : ) y el código de la función.
+
+Comprensión de listas
+En Python 3000 map, filter y reduce perderán importancia. Y aun-
+que estas funciones se mantendrán, reduce pasará a formar parte del
+módulo functools , con lo que quedará fuera de las funciones dispo-
+nibles por defecto, y map y filter se desaconsejarán en favor de las list
+comprehensions o comprensión de listas.
+
+La comprensión de listas, permite crear listas a partir de otras listas.
+Cada una de estas construcciones consta de una expresión que deter-
+mina cómo modificar el elemento de la lista original, seguida de una o
+varias clausulas for y opcionalmente una o varias clausulas if .
+
+
+Generadores
+Las expresiones generadoras funcionan de forma muy similar a la
+comprensión de listas. De hecho su sintaxis es exactamente igual, a
+excepción de que se utilizan paréntesis en lugar de corchetes:
+
+l2 = (n ** 2 for n in l)
+
+Sin embargo las expresiones generadoras se diferencian de la compren-
+sión de listas en que no se devuelve una lista, sino un generador.
+
+Un generador es una clase especial de función que genera valores sobre
+los que iterar. Para devolver el siguiente valor sobre el que iterar se
+utiliza la palabra clave yield en lugar de return.
+
+El generador se puede utilizar en cualquier lugar donde se necesite un
+objeto iterable. Por ejemplo en un for - in :
+for n in mi_generador(0, 5, 1):
+print n
+
+Como no estamos creando una lista completa en memoria, sino gene-
+rando un solo valor cada vez que se necesita, en situaciones en las que
+no sea necesario tener la lista completa el uso de generadores puede
+suponer una gran diferencia de memoria. En todo caso siempre es po-
+sible crear una lista a partir de un generador mediante la función list :
+lista = list(mi_generador)
+
+Decoradores
+Un decorador no es mas que una función que recibe una función
+como parámetro y devuelve otra función como resultado.
+
+Funciones que a su vez añaden funcionalidades a otras funciones.
+	Por eso es las denomina "decoradores", porque "decoran" a otras funciones.
+	Les añaden funcionalidades
+	
+Estructura de un decorador:
+	3 funciones (A, B y C) donde A recibe como parametro a B para devolver C.
+	Un decorador devuelve una funcion
+
+Si quisiéramos aplicar más de un decorador bastaría añadir una nueva
+línea con el nuevo decorador.
+
+@otro_decorador
+@mi_decorador
+def imp(s):
+	print s
+	
+Es importante advertir que los decoradores se ejecutarán de abajo a
+arriba. Es decir, en este ejemplo primero se ejecutaría mi_decorador y
+después otro_decorador .
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

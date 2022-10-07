@@ -1,0 +1,133 @@
+__init__ y self
+
+Lo primero que llama la atención en el ejemplo
+anterior es el nombre tan curioso que tiene el
+método __init__. Este nombre es una convención
+y no un capricho. El método __init__, con una 
+doble barra baja al principio y final del nombre,
+se ejecuta justo después de crear un nuevo objeto 
+a partir de la clase, proceso que se conoce con el
+nombre de instanciación. El método __init__ sirve,
+como sugiere su nombre, para realizar cualquier proceso
+de inicialización que sea necesario.
+
+Como vemos el primer parámetro de __init__ y del resto 
+de métodos de la clase es siempre self. Esta es una idea 
+inspirada en Modula-3 y sirve para referirse al objeto actual.
+Este mecanismo es necesario para poder acceder a los atributos
+y métodos del objeto diferenciando, por ejemplo, una variable 
+local mi_var de un atributo del objeto self.mi_var.
+
+Si volvemos al método __init__ de nuestra clase Coche veremos 
+cómo se utiliza self para asignar al atributo gasolina del objeto 
+(self.gaso-lina) el valor que el programador especificó para el 
+parámetro gasoli-na. El parámetro gasolina se destruye al final 
+de la función, mientras que el atributo gasolina se conserva 
+(y puede ser accedido) mientras el objeto viva.
+
+Para crear un objeto se escribiría el nombre de la clase seguido de 
+cualquier parámetro que sea necesario entre paréntesis. Estos parámetros
+son los que se pasarán al método __init__, que como decíamos es el método
+que se llama al instanciar la clase.
+
+mi_coche = Coche(3)
+
+Os preguntareis entonces cómo es posible que a la hora de crear nuestro
+primer objeto pasemos un solo parámetro a __init__, el número 3, cuando
+la definición de la función indica claramente que precisa de dos parámetros
+(self y gasolina). Esto es así porque Python pasa el primer argumento 
+(la referencia al objeto que se crea) automágicamen-te.
+
+En Python todo es un objeto.
+
+Herencia múltiple
+En el caso de que alguna de las clases padre tuvieran métodos con el mismo
+nombre y número de parámetros las clases sobreescribirían la implementación
+de los métodos de las clases más a su derecha en la definición.
+
+Polimorfismo
+se refiere a la habilidad de objetos de distintas clases de responder al 
+mismo mensaje. Esto se puede conseguir a través de la herencia: un objeto 
+de una clase derivada es al mismo tiempo un objeto de la clase padre, de 
+forma que allí donde se requiere un objeto de la clase padre también se puede
+utilizar uno de la clase hija.
+
+Python, al ser de tipado dinámico, no impone restricciones a los tipos
+que se le pueden pasar a una función, El polimorfismo en Python no es de gran 
+importancia.
+
+
+
+Encapsulación
+La encapsulación se refiere a impedir el acceso a determinados mé-
+todos y atributos de los objetos estableciendo así qué puede utilizarse
+desde fuera de la clase.
+
+En Python no existen los modificadores de acceso, y lo que se suele
+hacer es que el acceso a una variable o función viene determinado por
+su nombre: si el nombre comienza con dos guiones bajos "__" (y no termina
+también con dos guiones bajos) se trata de una variable o función pri-
+vada, en caso contrario es pública. Los métodos cuyo nombre comien-
+za y termina con dos guiones bajos son métodos especiales que Python
+llama automáticamente bajo ciertas circunstancias, como veremos al
+final del capítulo.
+
+dia = property(getDia, setDia) que es esto???
+
+Clases de “nuevo-estilo”
+La diferencia principal entre las clases antiguas y las de nuevo estilo
+consiste en que a la hora de crear una nueva clase anteriormente no se
+definía realmente un nuevo tipo, sino que todos los objetos creados a
+partir de clases, fueran estas las clases que fueran, eran de tipo instan-
+ce.
+
+Metodos especiales
+__init__(self, args)
+Método llamado después de crear el objeto para realizar tareas de
+inicialización.
+
+__new__(cls, args)
+Método exclusivo de las clases de nuevo estilo que se ejecuta antes que
+__init__ y que se encarga de construir y devolver el objeto en sí. Es
+equivalente a los constructores de C++ o Java. Se trata de un método
+estático, es decir, que existe con independencia de las instancias de
+la clase: es un método de clase, no de objeto, y por lo tanto el primer
+parámetro no es self , sino la propia clase: cls.
+
+__del__(self)
+Método llamado cuando el objeto va a ser borrado. También llamado
+destructor, se utiliza para realizar tareas de limpieza.
+
+__str__(self)
+Método llamado para crear una cadena de texto que represente a nues-
+tro objeto. Se utiliza cuando usamos print para mostrar nuestro objeto
+o cuando usamos la función str(obj) para crear una cadena a partir de
+nuestro objeto.
+
+__cmp__(self, otro)
+Método llamado cuando se utilizan los operadores de comparación
+para comprobar si nuestro objeto es menor, mayor o igual al objeto
+pasado como parámetro. Debe devolver un número negativo si nuestro
+objeto es menor, cero si son iguales, y un número positivo si nuestro
+objeto es mayor. Si este método no está definido y se intenta com-
+parar el objeto mediante los operadores < , <= , > o >= se lanzará una
+excepción. Si se utilizan los operadores == o != para comprobar si dos
+objetos son iguales, se comprueba si son el mismo objeto (si tienen el
+mismo id).
+
+__len__(self)
+Método llamado para comprobar la longitud del objeto. Se utiliza, por
+ejemplo, cuando se llama a la función len(obj) sobre nuestro objeto.
+Como es de suponer, el método debe devolver la longitud del objeto.
+
+Existen bastantes más métodos especiales, que permite entre otras
+cosas utilizar el mecanismo de slicing sobre nuestro objeto, utilizar
+los operadores aritméticos o usar la sintaxis de diccionarios.
+
+
+
+
+
+
+
+

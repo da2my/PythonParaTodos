@@ -1,0 +1,151 @@
+Módulos
+
+¿Que son?
+Un archivo con extension .py .pyc(Python compilado) o 
+un archivo escrito en C para CPython, que posee su
+propio espacio de nombres y que puede contener variables,
+funciones, clases e incluso otros modulos.
+
+¿Para qué sirve?
+Para organizar y reutilizar el codigo (modularizacion y
+reutilizacion).
+
+¿Como se crea un módulo?
+Tan sencillo como crear un archivo con extension .py y
+guardarlo donde nos interese.
+
+Curso de Python. Módulos. Vídeo 34 (12:30m):
+https://www.youtube.com/watch?v=t93x-vnFvP4&list=PLU8oAlHdN5BlvPxziopYZRd55pdqFwkeS&index=34
+
+Para facilitar el mantenimiento y la lectura los programas
+demasiado largos pueden dividirse en módulos, agrupando
+elementos relacionados. Los módulos son entidades que 
+permiten una organización y división lógica de nuestro
+código. 
+Los ficheros son su contrapartida física:
+cada archivo Python almacenado en disco equivale a un 
+módulo.
+
+Si quisiéramos utilizar la funcionalidad definida en este
+módulo en nuestro programa tendríamos que importarlo. 
+Para importar un módulo se utiliza la palabra clave 
+import seguida del nombre del módulo, que consiste en el 
+nombre del archivo menos la extensión.
+
+El import no solo hace que tengamos disponible todo lo 
+definido dentro del módulo, sino que también ejecuta el 
+código del módulo.
+
+La clausula import también permite importar varios módulos 
+en la misma línea. 
+En el siguiente ejemplo podemos ver cómo se importa con  
+una sola clausula import los módulos de la distribución 
+por defecto de Python os, que engloba funcionalidad 
+relativa al sistema operativo; sys, con funcionalidad 
+relacionada con el propio intérprete de Python y time, 
+en el que se almacenan funciones para manipular 
+fechas y horas.
+
+import os, sys, time
+
+print time.asctime()
+
+Aunque se considera una mala práctica, también es posible 
+importar todos los nombres del módulo al espacio de nombres
+actual usando el caracter * :
+
+from time import *
+
+Ahora bien, recordareis que a la hora de crear nuestro 
+primer módulo insistí en que lo guardarais en el mismo 
+directorio en el que se encontraba el programa que lo 
+importaba. Entonces, ¿cómo podemos importar los módulos
+os, sys o time si no se encuentran los archivos os.py, 
+sys.py y time.py en el mismo directorio?
+
+A la hora de importar un módulo Python recorre todos 
+los directorios indicados en la variable de entorno 
+PYTHONPATH en busca de un archivo con el nombre 
+adecuado. El valor de la variable PYTHONPATH se puede
+consultar desde Python mediante sys.path
+
+>>> import sys
+>>> sys.path
+
+De esta forma para que nuestro módulo estuviera disponible
+para todos los programas del sistema bastaría con que lo 
+copiáramos a uno de los directorios indicados en PYTHONPATH.
+
+En el caso de que Python no encontrara ningún módulo con
+el nombre especificado, se lanzaría una excepción de 
+tipo ImportError.
+
+Por último es interesante comentar que en Python los 
+módulos también son objetos; de tipo module en concreto. 
+Por supuesto esto significa que pueden tener atributos y 
+métodos. Uno de sus atributos, __name__ , se utiliza a 
+menudo para incluir código ejecutable en un módulo pero 
+que este sólo se ejecute si se llama al módulo como 
+programa, y no al importarlo. Para lograr esto basta 
+saber que cuando se ejecuta el módulo directamente 
+__name__ tiene como valor “__main__”, mientras que 
+cuando se importa, el valor de __name__ es el nombre 
+del módulo:
+
+print “Se muestra siempre”
+
+if __name__ == “__main__”:
+	print “Se muestra si no es importacion”
+
+Otro atributo interesante es __doc__ , que, como en el 
+caso de funciones y clases, sirve a modo de documentación 
+del objeto (docstring o cadena de documentación). Su 
+valor es el de la primera línea del cuerpo del módulo, 
+en el caso de que esta sea una cadena de texto; en caso
+contrario valdrá None
+
+Paquetes
+
+¿Que son?
+Directorios donde se almacenaran modulos relacionados 
+entre si
+
+¿Para que sirven?
+Para organozar y reutilizar los modulos
+
+¿Como se crea un paquete?
+Se crea una carpeta con un archivo __init__.py
+
+Si los módulos sirven para organizar el código, 
+los paquetes sirven para organizar los módulos. Los 
+paquetes son tipos especiales de módulos (ambos son de 
+tipo module) que permiten agrupar módulos relacionados. Mientras los módulos se corresponden a nivel físico con los archivos, los paquetes se representan mediante directorios.
+
+En una aplicación cualquiera podríamos tener, por ejemplo, 
+un paquete iu para la interfaz o un paquete bbdd para 
+la persistencia a base de datos.
+
+Para hacer que Python trate a un directorio como un 
+paquete es necesario crear un archivo __init__.py en 
+dicha carpeta. En este archivo se pueden definir 
+elementos que pertenezcan a dicho paquete, como 
+una constante DRIVER para el paquete bbdd ,aunque 
+habitualmente se tratará de un archivo vacío. 
+Para hacer que un cierto módulo se encuentre dentro 
+de un paquete, basta con copiar el archivo que define 
+el módulo al directorio del paquete.
+
+Como los modulos, para importar paquetes también se 
+utiliza import y from - import y el caracter. para 
+separar paquetes, subpaquetes y módulos.
+
+[Se podria reutilizar los modulos en cualquier proyecto
+python que pudieramos trabajar, haciendo lo que se llama 
+un "modulo distribuible"]
+
+Paquetes distribuibles
+
+para reutilizar el codigo
+
+1. Crear el paquete
+2. Instalar paquete
